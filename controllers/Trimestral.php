@@ -27,6 +27,7 @@ class Trimestral extends AdminController
     {
         parent::__construct();
         $this->load->model('trimestral_model');
+        $this->load->model('invoices_model');
     }
 
     public function index()
@@ -36,13 +37,6 @@ class Trimestral extends AdminController
 
     public function download()
     {
-        /*
-        $invoiceData = file_get_contents('https://clientes.reaccionestudio.com/admin/invoices/pdf/41');
-        file_put_contents(self::EXPORT_PATH . '/test.pdf', $invoiceData);
-
-        die('000');
-        */
-
         // get data
         $expenses = $this->trimestral_model->getExpenses();
         $invoices = $this->trimestral_model->getInvoices();
@@ -52,27 +46,80 @@ class Trimestral extends AdminController
         $pathId = self::EXPORT_PATH . 'exports/' . $id;
         mkdir($pathId, 0777, true);
 
+        // Expenses
         foreach($expenses as $expense)
         {
-            $this->proccess($expense['date'], $pathId, 'expenses', $expense['id']);
+            $this->proccessExpense($expense['date'], $pathId, 'expenses', $expense['id']);
         }
 
-        /* TODO: las facturas se generan en PDF de forma dinámica, no se guardan en la carpeta uploads ...
+        // Invoices
         foreach($invoices as $invoice)
         {
-            $this->proccess($invoice['date'], $pathId, 'invoices', $invoice['id']);
+            $this->generatePdfInvoice($invoice, $pathId);
         }
-        */
 
+        // TODO: compress folder
         die('--fin--');
     }
 
-    private function proccess($date, $pathId, $type, $id)
+    /**
+     * Generate invoice as PDF
+     * @param $id
+     */
+    private function generatePdfInvoice($invoice, $pathId)
+    {
+        $invoiceId = $invoice['id'];
+
+        $invoice        = $this->invoices_model->get($invoiceId);
+        $invoice        = hooks()->apply_filters('before_admin_view_invoice_pdf', $invoice);
+        $invoice_number = format_invoice_number($invoice->id);
+
+        try {
+            $pdf = invoice_pdf($invoice);
+        } catch (Exception $e) {
+            $message = $e->getMessage();
+            echo $message;
+            if (strpos($message, 'Unable to get the size of the image') !== false) {
+                show_pdf_unable_to_get_image_size_error();
+            }
+            die;
+        }
+
+        $pdfFilename = mb_strtoupper(slug_it($invoice_number)) . '.pdf';
+        $pdfData  = $pdf->Output($pdfFilename, 'S');
+
+        // Save PDF
+        $dateObj = DateTime::createFromFormat('Y-m-d', $invoice->date);
+
+        // folder
+        $folderTypeName = 'Ingresos';
+        $monthName = $dateObj->format('m') . '. ' . self::MONTHS[$dateObj->format('n')];
+        $folder = $pathId . '/' . $dateObj->format('Y') . '/' . $monthName . '/' . $folderTypeName;
+        $fullPdfFilepath = $folder . '/' . $pdfFilename;
+
+        try{
+
+            if( ! file_exists($folder)){
+                mkdir($folder, 0777, true);
+            }
+
+            file_put_contents($fullPdfFilepath, $pdfData);
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+    /**
+     * Proccess an expense
+     */
+    private function proccessExpense($date, $pathId, $type, $id)
     {
         $dateObj = DateTime::createFromFormat('Y-m-d', $date);
 
         // folder
-        $folderTypeName = ($type == 'expenses') ? 'Gastos' : 'Ingresos';
+        $folderTypeName = 'Gastos';
         $monthName = $dateObj->format('m') . '. ' . self::MONTHS[$dateObj->format('n')];
         $folder = $pathId . '/' . $dateObj->format('Y') . '/' . $monthName . '/' . $folderTypeName;
 
