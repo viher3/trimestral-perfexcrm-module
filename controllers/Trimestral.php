@@ -4,9 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Trimestral extends AdminController
 {
-    const EXPORT_PATH = '/var/www/vhosts/reaccionestudio.com/clientes.reaccionestudio.com/modules/trimestral/';
+    const EXPORT_PATH = '/var/www/clientes.reaccionestudio.com/modules/trimestral/';
 
-    const UPLOADS_PATH = '/var/www/vhosts/reaccionestudio.com/clientes.reaccionestudio.com/uploads';
+    const UPLOADS_PATH = '/var/www/clientes.reaccionestudio.com/uploads';
 
     const MONTHS = [
         1 => 'Enero',
@@ -36,10 +36,12 @@ class Trimestral extends AdminController
 
     public function download()
     {
+        /*
         $invoiceData = file_get_contents('https://clientes.reaccionestudio.com/admin/invoices/pdf/41');
         file_put_contents(self::EXPORT_PATH . '/test.pdf', $invoiceData);
 
         die('000');
+        */
 
         // get data
         $expenses = $this->trimestral_model->getExpenses();
