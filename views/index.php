@@ -16,22 +16,24 @@
                         <p><?= _l('description') ?></p>
                         <br />
 
-                        <div class="input-group">
-                            <label for="init_date"><?= _l('init_date') ?></label>
-                            <input name="init_date" id="init_date" type="date" class="form-control input-sm" />
-                        </div>
-                        <br />
-                        <div class="input-group">
-                            <label for="end_date"><?= _l('end_date') ?></label>
-                            <input name="end_date" id="end_date" type="date" class="form-control input-sm" />
-                        </div>
+                        <?php echo form_open_multipart(admin_url('trimestral/download')) ?>
+                            <div class="input-group">
+                                <label for="init_date"><?= _l('init_date') ?></label>
+                                <input name="init_date" id="init_date" type="date" class="form-control input-sm" required />
+                            </div>
+                            <br />
+                            <div class="input-group">
+                                <label for="end_date"><?= _l('end_date') ?></label>
+                                <input name="end_date" id="end_date" type="date" class="form-control input-sm" required />
+                            </div>
 
-                        <br />
-                        <p align="center">
-                            <a class="btn btn-info pull-left display-block mright5" href="<?= admin_url('trimestral/download') ?>">
-                                <i class="fa fa-download"></i>&nbsp;&nbsp;<?= _l('download') ?>
-                            </a>
-                        </p>
+                            <br />
+                            <p align="center">
+                                <button type="submit" class="btn btn-info pull-left display-block mright5">
+                                    <i class="fa fa-download"></i>&nbsp;&nbsp;<?= _l('download') ?>
+                                </button>
+                            </p>
+                        <?php echo form_close(); ?>
 
                     </div>
                 </div>

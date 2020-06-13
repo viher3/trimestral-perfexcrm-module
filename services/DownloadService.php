@@ -46,8 +46,8 @@ class DownloadService
     {
         try {
             // get data
-            $expenses = $this->trimestral_model->getExpenses();
-            $invoices = $this->trimestral_model->getInvoices();
+            $expenses = $this->trimestral_model->getExpenses($this->initDate, $this->endDate);
+            $invoices = $this->trimestral_model->getInvoices($this->initDate, $this->endDate);
 
             // Init folder
             $id = (new DateTime())->format('Ymdhis');

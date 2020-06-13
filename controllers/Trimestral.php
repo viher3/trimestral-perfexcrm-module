@@ -35,6 +35,8 @@ class Trimestral extends AdminController
     public function download()
     {
         try{
+            // TODO: validate dates
+
             $downloadService = new DownloadService(
                 $this->trimestral_model,
                 $this->invoices_model,
