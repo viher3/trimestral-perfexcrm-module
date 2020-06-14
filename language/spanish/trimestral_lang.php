@@ -1,5 +1,6 @@
 <?php
 
+$lang['trimestral'] = 'Trimestral';
 $lang['title'] = 'Descargar gastos e ingresos';
 $lang['description'] = 'Selecciona un rango de fechas para descargar todos los ingresos y gastos registrados organizados por años y meses.';
 $lang['init_date'] = 'Fecha inicio';

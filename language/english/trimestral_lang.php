@@ -1,5 +1,6 @@
 <?php
 
+$lang['trimestral'] = 'Trimestral';
 $lang['title'] = 'Download expenses and incomes';
 $lang['description'] = 'Select a date range to dowlonad all the incomes and expenses grouped by years and months.';
 $lang['init_date'] = 'Start date';
