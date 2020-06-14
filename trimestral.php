@@ -14,6 +14,11 @@ define('TRIMESTRAL_MODULE_NAME', 'trimestral');
 hooks()->add_action('admin_init', 'trimestral_module_init_menu_items');
 
 /**
+ * Register language files, must be registered if the module is using languages
+ */
+register_language_files(TRIMESTRAL_MODULE_NAME, [TRIMESTRAL_MODULE_NAME]);
+
+/**
  * Init module menu items in setup in admin_init hook
  * @return null
  */
