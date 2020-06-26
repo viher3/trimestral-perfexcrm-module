@@ -57,3 +57,7 @@ Folder structure example will be like:
 In some countries this feature is very useful when you have to report all your incomes and expenses to the country treasury. For example, in Spain you must send every 3 months this data in a process known as 'Declaración trimestral del IVA'.  
 
 With 'Trimestral' module you can easily package all your incomes and expenses with only three clicks. It's awesome! 
+
+### Screenshots
+
+![Screenshot](/assets/screenshot.jpg)
