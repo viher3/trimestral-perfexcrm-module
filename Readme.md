@@ -60,4 +60,4 @@ With 'Trimestral' module you can easily package all your incomes and expenses wi
 
 ### Screenshots
 
-![Screenshot](/assets/screenshot.jpg)
+![Screenshot](/assets/screenshot.png)
