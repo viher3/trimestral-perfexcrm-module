@@ -38,11 +38,7 @@ Folder structure example will be like:
 
 ### Installation instructions
 
-- Extract 'trimestral' folder in the following path:
-
-`your_perfex_crm/modules/`
-
-- Trimestral module path should be like:
+- Create a new folder named 'trimestral' and extract all the files in the following path:
 
 `your_perfex_crm/modules/trimestral`
 
