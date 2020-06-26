@@ -47,7 +47,7 @@ class InvoiceProcessor
         $dateObj = DateTime::createFromFormat('Y-m-d', $invoice->date);
 
         // folder
-        $folderTypeName = _l('invoicesFolderName');
+        $folderTypeName = _l('trimestral_invoicesFolderName');
         $months = DateLanguage::monthsArray();
         $monthName = $dateObj->format('m') . '. ' . $months[$dateObj->format('n')];
         $folder = $pathId . '/' . $dateObj->format('Y') . '/' . $monthName . '/' . $folderTypeName;

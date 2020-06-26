@@ -15,7 +15,7 @@ class ExpenseProcessor
         $dateObj = DateTime::createFromFormat('Y-m-d', $date);
 
         // folder
-        $folderTypeName = _l('expensesFolderName');
+        $folderTypeName = _l('trimestral_expensesFolderName');
         $months = DateLanguage::monthsArray();
         $monthName = $dateObj->format('m') . '. ' . $months[$dateObj->format('n')];
         $folder = $pathId . '/' . $dateObj->format('Y') . '/' . $monthName . '/' . $folderTypeName;

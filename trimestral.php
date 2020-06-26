@@ -27,13 +27,13 @@ function trimestral_module_init_menu_items()
     $CI = &get_instance();
 
     $CI->app->add_quick_actions_link([
-        'name'       => _l('trimestral'),
+        'name'       => _l('trimestral_name'),
         'url'        => 'trimestral',
     ]);
 
     $CI->app_menu->add_sidebar_children_item('utilities', [
         'slug'     => 'trimestral',
-        'name'     => 'Trimestral',
+        'name'     => _l('trimestral_name'),
         'href'     => admin_url('trimestral'),
     ]);
 }

@@ -46,6 +46,7 @@ Folder structure example will be like:
 
 `your_perfex_crm/modules/trimestral`
 
+- Navigate in your Perfex CRM admin area to Setup->Modules and you will be able to see your module listed.
 
 ### Usage
 

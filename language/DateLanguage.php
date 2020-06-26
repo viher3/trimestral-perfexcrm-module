@@ -10,7 +10,7 @@ class DateLanguage
         $months = [];
 
         for($i=1;$i<=12;$i++){
-            $months[$i] = _l('month_' . $i);
+            $months[$i] = _l('trimestral_month_' . $i);
         }
 
         return $months;
